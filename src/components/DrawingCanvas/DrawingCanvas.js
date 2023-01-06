@@ -15,7 +15,7 @@ const DrawingCanvas = () => {
   const [koor, setKoor] = useState([]);
   const [dummy, setDummy] = useState({});
   useEffect(() => {
-    // getMapApi();
+    getMapApi();
     getTable();
 
     const canvas = canvasRef.current;
@@ -58,21 +58,38 @@ const DrawingCanvas = () => {
       }
     };
   }, [dummy]);
-
   function getMapApi() {
-    axios
-      .get("http://127.0.0.1:5050/api/v1/images/getImage")
-      .then((res) => {
-        // const link = "https://wallpaperaccess.com/full/3538579.jpg";
-        // const blob = new Blob([link], { type: "image/jpeg" });
-        // saveAs(blob, "assets/image.jpg");
-        // setApimap(res.data.link);
-        // console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
+    fetch("http://127.0.0.1:5050/api/v1/images/getImage")
+      .then((response) => response.blob())
+      .then((blob) => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.style.display = "none";
+        a.href = url;
+        // the filename you want
+        a.download = "../image.jpg";
+        a.pathname = "./";
+        console.log(a.pathname);
+        document.body.appendChild(a);
+        a.click();
+        URL.revokeObjectURL(url);
+        console.log("burası map function");
       });
   }
+  // function getMapApi() {
+  //   axios
+  //     .get("http://127.0.0.1:5050/api/v1/images/getImage")
+  //     .then((res) => {
+  //       // const link = "https://wallpaperaccess.com/full/3538579.jpg";
+  //       // const blob = new Blob([link], { type: "image/jpeg" });
+  //       // saveAs(blob, "assets/image.jpg");
+  //       // setApimap(res.data.link);
+  //       // console.log(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
 
   function getTable() {
     axios
