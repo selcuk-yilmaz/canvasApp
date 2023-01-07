@@ -6,6 +6,7 @@ import table from "../../assets/tableBlack.png";
 // import ReactCanvas from "react-canvas"
 import { saveAs } from "file-saver";
 import DownloadMap from "./DownloadMap";
+
 const DrawingCanvas = () => {
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
@@ -14,9 +15,10 @@ const DrawingCanvas = () => {
   const [apimap, setApimap] = useState();
   const [koor, setKoor] = useState([]);
   const [dummy, setDummy] = useState({});
+
   useEffect(() => {
     // getMapApi();
-    // getTable();
+    getTable();
 
     const canvas = canvasRef.current;
     canvas.width = 800;
@@ -75,7 +77,7 @@ const DrawingCanvas = () => {
         URL.revokeObjectURL(url);
         console.log("burası map function");
       });
-  }
+  };
   // function getMapApi() {
   //   axios
   //     .get("http://127.0.0.1:5050/api/v1/images/getImage")
