@@ -15,8 +15,8 @@ const DrawingCanvas = () => {
   const [koor, setKoor] = useState([]);
   const [dummy, setDummy] = useState({});
   useEffect(() => {
-    getMapApi();
-    getTable();
+    // getMapApi();
+    // getTable();
 
     const canvas = canvasRef.current;
     canvas.width = 800;
@@ -34,7 +34,7 @@ const DrawingCanvas = () => {
     // console.log("MApppppp", mapFoto.width);
     mapFoto.src = tableColor;
     mapFoto.onload = function () {
-      context.drawImage(mapFoto, 0, 400);
+      context.drawImage(mapFoto,400 , 400);
 
       // const avatar = new Image();
       // avatar.src = table;
@@ -68,7 +68,7 @@ const DrawingCanvas = () => {
         a.href = url;
         // the filename you want
         a.download = "../image.jpg";
-        a.pathname = "./";
+        // a.pathname = "./";
         console.log(a.pathname);
         document.body.appendChild(a);
         a.click();
